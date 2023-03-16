@@ -10,7 +10,6 @@ import React from "react";
 export default function Video() {
 	const { videoId } = useParams();
 	const { data: video, isLoading, isError } = useGetVideoQuery(videoId);
-	console.log(video);
 
 	// decide what to render
 	let content = null;

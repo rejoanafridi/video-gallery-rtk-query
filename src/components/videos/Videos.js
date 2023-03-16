@@ -3,10 +3,19 @@ import Video from "./Video";
 
 import VideoLoader from "../ui/loaders/VideoLoader";
 import Error from "../ui/Error";
+import { useEffect, useState } from "react";
 
 export default function Videos() {
-	const { data: videos, isLoading, isError } = useGetVideosQuery();
+	const [data, setData] = useState(false);
+	const {
+		data: videos,
+		isLoading,
+		isError,
+	} = useGetVideosQuery();
 
+	useEffect(() => {
+		setData(true);
+	}, []);
 
 	// decide what to render
 	let content = null;
@@ -28,7 +37,9 @@ export default function Videos() {
 	}
 
 	if (!isLoading && !isError && videos?.length > 0) {
-		content = videos.map((video) => <Video key={video.id} video={video} />);
+		content = videos.map((video) => (
+			<Video key={video.id} video={video} />
+		));
 	}
 
 	return content;
